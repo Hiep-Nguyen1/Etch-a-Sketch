@@ -1,8 +1,60 @@
-html, body {
-    height: 100%;
+body, html {
+    height: 85%;
 }
 
-.container {
-    width: 960px;
-    height: 960px;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.drawPad {
+    width: 480px;
+    height: 480px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.controls {
+    display: flex;
+    flex: 0 1 auto;
+}
+
+.colorChoice {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.clear {
+    align-self: center;
+    background-color: red;
+}
+
+button {
+    height: 40px;
+    width: 160px;
+    background-color: darkgray;
+}
+
+input {
+    height: 20px;
+    margin-right: 20px;
+}
+
+.containerChangeGrid {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle {
+    background-color: lightgray;
+}
+
+.toggleClear {
+    background-color: lightcoral;
 }
