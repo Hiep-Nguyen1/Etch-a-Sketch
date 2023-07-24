@@ -1,7 +1,7 @@
-const drawpad = document.querySelector('.container');
+const drawpad = document.querySelector('.drawPad');
 
 function createGrid (rows, columns){
-    drawpad.setAttribute('style','display: flex; flex-direction: column; flex: 1 1 auto; justify-content: space-evenly; border-style: solid; border-color: gray;'); 
+    drawpad.setAttribute('style','display: flex; flex-direction: column; flex: 0 1 auto; justify-content: space-evenly; border-style: solid; border-color: gray;'); 
 
     for(let i = 0; i < rows; i++){ //creates the rows of the grid
         const row = document.createElement('div'); 
@@ -25,25 +25,29 @@ function createGrid (rows, columns){
 
 
 function draw () {                                          //Activates drawing only when mouse is held down
-    drawpad.addEventListener("mousedown", (e) => hold());
-    drawpad.addEventListener("mouseup", (e) => release());
-    drawpad.addEventListener("mouseleave", (e) => release());
+    drawpad.addEventListener("mousedown", () => hold());
+    drawpad.addEventListener("mouseup", () => release());
+    drawpad.addEventListener("mouseleave", () => release());
 }
 
 function hold () {
     squares.forEach((square) => square.addEventListener("mouseenter", enter)); 
 }
 
-function enter () {
-    this.style.backgroundColor = 'black';
+function enter (e) {
+    e.target.style.backgroundColor = color;
 }
 
 function release () {
     squares.forEach((square) => square.removeEventListener("mouseenter", enter)); 
 }
 
+let color = 'white';
 
-
-createGrid(10,10);
+createGrid(30,30);
 const squares = document.querySelectorAll('.square');
 draw();
+
+const btns = document.querySelectorAll('.colorChange');
+btns.forEach((btn) => btn.addEventListener('click', (e) => color = e.target.id));
+
