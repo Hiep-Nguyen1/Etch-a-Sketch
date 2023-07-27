@@ -42,6 +42,14 @@ function release () {
     squares.forEach((square) => square.removeEventListener("mouseenter", enter)); 
 }
 
+function black () {
+    color = 'black';
+}
+
+function clear () {
+    squares.forEach((square) => square.style.backgroundColor = 'white')
+}
+
 let color = 'white';
 
 createGrid(30,30);
@@ -49,5 +57,8 @@ const squares = document.querySelectorAll('.square');
 draw();
 
 const btns = document.querySelectorAll('.colorChange');
-btns.forEach((btn) => btn.addEventListener('click', (e) => color = e.target.id));
+btns.forEach((btn) => btn.addEventListener('click', (e) => black()));
+
+const btnClear = document.querySelector('.clear');
+btnClear.addEventListener('click', clear);
 
