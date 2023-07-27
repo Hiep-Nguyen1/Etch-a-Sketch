@@ -1,6 +1,6 @@
 const drawpad = document.querySelector('.drawPad');
 let squares = '';
-let color = 'white';
+let color = 'black';
 
 function createGrid (rows, columns){
     for(let i = 0; i < rows; i++){ //creates the rows of the grid
@@ -41,11 +41,14 @@ function release () {
 }
 
 function black () {
+    removeRGB();
     color = 'black';
 }
 
 function clear () {
     squares.forEach((square) => square.style.backgroundColor = 'white')
+    removeRGB();
+    color = 'black';
 }
 
 function gridResize(){
@@ -67,10 +70,23 @@ function gridResize(){
 
     createGrid(size,size);
     updateSquare();
+    color = 'black';
 }
 
 function updateSquare () { //will set squares variable to elements with current square class
     squares = document.querySelectorAll('.square');
+}
+
+function rgb () {
+    squares.forEach((square) => square.addEventListener("mouseenter", randomColor));
+}
+
+function randomColor () {
+    color = "#" + Math.floor(Math.random()*16777215).toString(16); //sets color to a random color in hexadecimal value
+}
+
+function removeRGB (){
+    squares.forEach((square) => square.removeEventListener("mouseenter", randomColor)); 
 }
 
 createGrid(30,30);
@@ -78,8 +94,11 @@ updateSquare();
  
 (function () { //IIFE to set event listeners without populating global space
     drawpad.setAttribute('style','display: flex; flex-direction: column; flex: 0 1 auto; justify-content: space-evenly; border-style: solid; border-color: gray;');
-    const btns = document.querySelectorAll('.colorChange');
-    btns.forEach((btn) => btn.addEventListener('click', (e) => black()));
+    const btnBlack = document.querySelector('.black');
+    btnBlack.addEventListener('click', black);
+
+    const btnRGB = document.querySelector('.rgb');
+    btnRGB.addEventListener('click', rgb);
 
     const btnClear = document.querySelector('.clear');
     btnClear.addEventListener('click', clear);
